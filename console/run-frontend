@@ -1,3 +1,7 @@
 #!bin/bash
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+php -S localhost:8082 -t backend/web
+else
 /Applications/MAMP/bin/php/php5.6.10/bin/php -S localhost:8082 -t frontend/web
+fi
 #open -a "Safari" localhost:8083
