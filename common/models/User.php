@@ -11,6 +11,8 @@ use backend\models\Role;
 use backend\models\Status;
 use backend\models\UserType;
 use common\models\Profile;
+use common\models\Address;
+use common\models\Phone;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -203,6 +205,42 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Profile::className(), [
             'user_id' => 'id'
         ]);
+    }
+
+    /**
+     * @getAddressList
+     *
+     */
+    public function getAddressList() {
+        $droptions = Address::find()->asArray()->all();
+        return Arrayhelper::map($droptions, 'name', 'id');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAddresses() {
+        return $this->hasMany(Address::className(), [
+            'id' => 'user_id'
+        ]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPhones() {
+        return $this->hasMany(Phone::className(), [
+            'id' => 'user_id'
+        ]);
+    }
+
+    /**
+     * @getPhoneList
+     *
+     */
+    public function getPhoneList() {
+        $droptions = Phone::find()->asArray()->all();
+        return Arrayhelper::map($droptions, 'phone', 'id');
     }
 
     /**

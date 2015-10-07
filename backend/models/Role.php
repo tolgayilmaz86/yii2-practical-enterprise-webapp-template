@@ -13,6 +13,7 @@ use Yii;
  */
 class Role extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
