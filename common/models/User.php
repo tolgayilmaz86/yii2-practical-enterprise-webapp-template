@@ -35,7 +35,7 @@ use yii\helpers\Html;
 class User extends ActiveRecord implements IdentityInterface
 {
 //    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
+    const STATUS_ACTIVE = 1;
 
     /**
      * @inheritdoc
@@ -176,6 +176,11 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
 
+//        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+//        $parts = explode('_', $token);
+//        $timestamp = (int) end($parts);
+//        return $timestamp + $expire >= time();
+
         $timestamp = (int) substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
@@ -205,6 +210,28 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Profile::className(), [
             'user_id' => 'id'
         ]);
+    }
+
+    /**
+     * @getProfileId
+     *
+     */
+    public function getProfileId()
+    {
+        return $this->profile ? $this->profile->id : 'none';
+    }
+
+    /**
+     * @getProfileLink
+     *
+     */
+    public function getProfileLink()
+    {
+        $url = Url::to([
+            'profile/view', 'id'=>$this->profileId
+        ]);
+        $options = [];
+        return Html::a($this->profile ? 'profile' : 'none', $url, $options);
     }
 
     /**
@@ -364,6 +391,7 @@ class User extends ActiveRecord implements IdentityInterface
             'user_type_value' => 'user_type_id'
         ]);
     }
+
     /**
      * get user type name
      *
@@ -372,6 +400,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->userType ? $this->userType->user_type_name : '- no user type -';
     }
+
     /**
      * get list of user types for dropdown
      */
@@ -388,28 +417,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function getUserTypeId()
     {
         return $this->userType ? $this->userType->id : 'none';
-    }
-
-    /**
-     * @getProfileId
-     *
-     */
-    public function getProfileId()
-    {
-        return $this->profile ? $this->profile->id : 'none';
-    }
-
-    /**
-     * @getProfileLink
-     *
-     */
-    public function getProfileLink()
-    {
-        $url = Url::to([
-            'profile/view', 'id'=>$this->profileId
-        ]);
-        $options = [];
-        return Html::a($this->profile ? 'profile' : 'none', $url, $options);
     }
 
     /**

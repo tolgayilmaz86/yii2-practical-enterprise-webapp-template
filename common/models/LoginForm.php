@@ -80,7 +80,6 @@ class LoginForm extends Model
         if ($this->_user === null) {
             $this->_user = User::findByUsername($this->username);
         }
-
         return $this->_user;
     }
 
@@ -104,14 +103,20 @@ class LoginForm extends Model
 
     public function loginAdmin()
     {
-        if (($this->validate()) && $this->getUser()->role_id >=
-            ValueHelpers::getRoleValue('Admin')
-            && $this->getUser()->status_id ==
-            ValueHelpers::getStatusValue('Active')) {
-            return Yii::$app->user->login($this->getUser(),
-                $this->rememberMe ? 3600 * 24 * 30 : 0);
+        if (($this->validate()) && PermissionHelpers::requireMinimumRole('Admin', $this->getUser()->id)) {
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         } else {
             throw new NotFoundHttpException('You Shall Not Pass.');
         }
+//        if (($this->validate()) && $this->getUser()->role_id >=
+//            ValueHelpers::getRoleValue('Admin')
+//            && $this->getUser()->status_id ==
+//            ValueHelpers::getStatusValue('Active')) {
+//            return Yii::$app->user->login($this->getUser(),
+//                $this->rememberMe ? 3600 * 24 * 30 : 0);
+//        } else {
+//            throw new NotFoundHttpException('You Shall Not Pass.');
+//        }
     }
+
 }

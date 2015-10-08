@@ -31,10 +31,15 @@ Class PermissionHelpers
     {
         $connection = \Yii::$app->db;
         $userid = Yii::$app->user->identity->id;
-        $sql = "SELECT id FROM $model_name WHERE user_id=:userid AND id=:model_id";
+
+        $sql = "SELECT id FROM $model_name
+                WHERE user_id=:userid AND id=:model_id";
+
         $command = $connection->createCommand($sql);
+
         $command->bindValue(":userid", $userid);
         $command->bindValue(":model_id", $model_id);
+
         if($result = $command->queryOne())
             return true;
         return false;
@@ -50,8 +55,7 @@ Class PermissionHelpers
      */
     public static function requireUpgradeTo($user_type_name)
     {
-        if ( Yii::$app->user->identity->user_type_id !=
-            ValueHelpers::getUserTypeValue($user_type_name))
+        if (!ValueHelpers::userTypeMatch($user_type_name))
         {
             return Yii::$app->getResponse()->redirect(Url::to(['upgrade/index']));
         }
@@ -65,12 +69,7 @@ Class PermissionHelpers
      */
     public static function requireStatus($status_name)
     {
-        if ( Yii::$app->user->identity->status_id ==
-            ValueHelpers::getStatusValue($status_name)) {
-            return true;
-        } else {
-            return false;
-        }
+        return ValueHelpers::statusMatch($status_name);
     }
 
     /**
@@ -82,11 +81,9 @@ Class PermissionHelpers
     public static function requireMinimumStatus($status_name)
     {
         if ( Yii::$app->user->identity->status_id >=
-            ValueHelpers::getStatusValue($status_name)) {
+            ValueHelpers::getStatusValue($status_name))
             return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 
     /**
@@ -97,12 +94,7 @@ Class PermissionHelpers
      */
     public static function requireRole($role_name)
     {
-        if ( Yii::$app->user->identity->role_id ==
-            ValueHelpers::getRoleValue($role_name)) {
-            return true;
-        } else {
-            return false;
-        }
+        return ValueHelpers::roleMatch($role_name);
     }
 
     /**
@@ -111,12 +103,23 @@ Class PermissionHelpers
      * @param mixed $role_name
      * @return success
      */
-    public static function requireMinimumRole($role_name)
+    public static function requireMinimumRole($role_name, $userId = null)
     {
-        if ( Yii::$app->user->identity->role_id >=
-            ValueHelpers::getRoleValue($role_name)) {
-            return true;
-        } else {
+        if (ValueHelpers::isRoleNameValid($role_name))
+        {
+            if ($userId == null)
+            {
+                $userRoleValue = ValueHelpers::getUsersRoleValue();
+            }
+            else
+            {
+                $userRoleValue = ValueHelpers::getUsersRoleValue($userId);
+            }
+            return
+                $userRoleValue >= ValueHelpers::getRoleValue($role_name) ? true : false;
+        }
+        else
+        {
             return false;
         }
     }
