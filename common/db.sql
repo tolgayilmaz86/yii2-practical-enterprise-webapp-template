@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `yii2advanced` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `yii2advanced`;
 -- MySQL dump 10.13  Distrib 5.6.24, for linux-glibc2.5 (x86_64)
 --
 -- Host: 127.0.0.1    Database: yii2advanced
@@ -277,7 +279,7 @@ CREATE TABLE `profile` (
   KEY `fk_gender_id_idx` (`gender_id`),
   CONSTRAINT `fk_gender_id` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,6 +288,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+INSERT INTO `profile` VALUES (1,1,'tolga','yilmaz','1986-10-10',2,'0000-00-00 00:00:00','2015-10-09 17:04:53');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,7 +313,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'superuser',100),(2,'admin',99),(3,'user',98),(4,'viewer',97);
+INSERT INTO `role` VALUES (1,'Superuser',1),(2,'Admin',2),(3,'User',3),(4,'Viewer',4);
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,7 +338,7 @@ CREATE TABLE `status` (
 
 LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
-INSERT INTO `status` VALUES (1,'Active',100),(2,'Pending',99),(3,'Suspended',98);
+INSERT INTO `status` VALUES (1,'Active',1),(2,'Pending',2),(3,'Suspended',3);
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,7 +406,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','n77ZfQ1kwHf8WIy5OrBIjGz3VUDSPO22','$2y$13$EZshy6YazdZuOI07GKxNruyTrTZ3syYc6nM9T97XPA2i63AjbRo76',NULL,'tolgayilmaz86@gmail.com',10,'2015-10-06 16:59:56','2015-10-06 16:59:56',2,1,'en');
+INSERT INTO `user` VALUES (1,'admin','n77ZfQ1kwHf8WIy5OrBIjGz3VUDSPO22','$2y$13$EZshy6YazdZuOI07GKxNruyTrTZ3syYc6nM9T97XPA2i63AjbRo76',NULL,'tolgayilmaz86@gmail.com',1,'2015-10-06 16:59:56','2015-10-06 16:59:56',1,1,'en');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,7 +431,7 @@ CREATE TABLE `user_type` (
 
 LOCK TABLES `user_type` WRITE;
 /*!40000 ALTER TABLE `user_type` DISABLE KEYS */;
-INSERT INTO `user_type` VALUES (1,'System',100),(2,'Free',99),(3,'Paid',98),(4,'Customer',97),(5,'Guest',96);
+INSERT INTO `user_type` VALUES (1,'System',1),(2,'Free',2),(3,'Paid',3),(4,'Customer',4),(5,'Guest',5);
 /*!40000 ALTER TABLE `user_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -441,4 +444,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-08 11:36:35
+-- Dump completed on 2015-10-09 17:11:43
