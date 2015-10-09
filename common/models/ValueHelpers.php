@@ -6,6 +6,10 @@
  * Time: 13:16
  */
 namespace common\models;
+
+use \backend\models\Role;
+use \backend\models\User;
+use \backend\models\Status;
 Class ValueHelpers
 {
     /**
@@ -82,6 +86,7 @@ Class ValueHelpers
         $role = Role::find('role_name')
             ->where(['role_name' => $role_name])
             ->one();
+        echo "$role->role_name";
         return isset($role->role_name) ? true : false;
     }
 

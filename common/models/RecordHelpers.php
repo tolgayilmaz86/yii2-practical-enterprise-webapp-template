@@ -13,6 +13,7 @@ Class RecordHelpers
 {
 
     /**
+     * Checks for a user’s record on the model supplied
      * Example usage:
      * If ($already_exists = RecordHelpers::userHas('profile')) {
      * show profile with id with value of $already_exists
@@ -20,7 +21,7 @@ Class RecordHelpers
      * go to form to create profile
      * }
      * @param $model_name
-     * @return bool
+     * @return the id of the record
      */
     public static function userHas($model_name)
     {

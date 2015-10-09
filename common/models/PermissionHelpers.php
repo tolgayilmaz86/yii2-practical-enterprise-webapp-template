@@ -10,8 +10,6 @@ namespace common\models;
 
 use yii;
 use yii\helpers\Url;
-use yii\web\Controller;
-use common\models\ValueHelpers;
 Class PermissionHelpers
 {
 
@@ -116,7 +114,7 @@ Class PermissionHelpers
                 $userRoleValue = ValueHelpers::getUsersRoleValue($userId);
             }
             return
-                $userRoleValue >= ValueHelpers::getRoleValue($role_name) ? true : false;
+                $userRoleValue <= ValueHelpers::getRoleValue($role_name) ? true : false;
         }
         else
         {

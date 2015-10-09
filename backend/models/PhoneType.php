@@ -5,21 +5,21 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "gender".
+ * This is the model class for table "phone_type".
  *
  * @property integer $id
- * @property string $gender_name
+ * @property string $type
  *
- * @property Profile[] $profiles
+ * @property Phone[] $phones
  */
-class Gender extends \yii\db\ActiveRecord
+class PhoneType extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'gender';
+        return 'phone_type';
     }
 
     /**
@@ -28,8 +28,9 @@ class Gender extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['gender_name'], 'required'],
-            [['gender_name'], 'string', 'max' => 45]
+            [['id', 'type'], 'required'],
+            [['id'], 'integer'],
+            [['type'], 'string', 'max' => 45]
         ];
     }
 
@@ -40,15 +41,15 @@ class Gender extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'gender_name' => 'Gender',
+            'type' => 'Type',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProfiles()
+    public function getPhones()
     {
-        return $this->hasMany(Profile::className(), ['gender_id' => 'id']);
+        return $this->hasMany(Phone::className(), ['type_id' => 'id']);
     }
 }

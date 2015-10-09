@@ -11,7 +11,7 @@ use Yii;
  * @property string $user_type_name
  * @property integer $user_type_value
  */
-class UserType extends \yii\db\ActiveRecord
+class UserType extends ActiveRecord
 {
     /**
      * @inheritdoc
