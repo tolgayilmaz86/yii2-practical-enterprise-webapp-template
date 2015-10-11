@@ -3,11 +3,14 @@
 namespace backend\controllers;
 
 use Yii;
+
 use backend\models\Profile;
 use common\models\RecordHelpers;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\PermissionHelpers;
+use backend\models\search\ProfileSearch;
 
 /**
  * ProfileController implements the CRUD actions for Profile model.
@@ -26,16 +29,36 @@ class ProfileController extends Controller
                         'actions' => ['index', 'view','create', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
+                        // this is also applicable rather than access2
+//                        'matchCallback' => function ($rule, $action)
+//                            {
+//                                return PermissionHelpers::requireStatus('Active');
+//                            }
                     ],
 
                 ],
             ],
 
+            'access2' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index', 'view','create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view','create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return PermissionHelpers::requireStatus('Active');
+                        }
+                    ],
+
+                ],
+
+            ],
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    //we eliminated the get variable being handed into the method,
-                    //so the record id can’t be hijacked through the browser
                     'delete' => ['post'],
                 ],
             ],

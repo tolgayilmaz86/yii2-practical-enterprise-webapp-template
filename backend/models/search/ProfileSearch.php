@@ -1,5 +1,4 @@
 <?php
-
 namespace backend\models\search;
 
 use Yii;
@@ -7,66 +6,126 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Profile;
 
-/**
- * ProfileSearch represents the model behind the search form about `backend\models\Profile`.
- */
 class ProfileSearch extends Profile
 {
-    /**
-     * @inheritdoc
-     */
+    public $genderName;
+    public $gender_id;
+    public $userId;
+
+
     public function rules()
     {
         return [
-            [['id', 'user_id', 'gender_id'], 'integer'],
-            [['first_name', 'last_name', 'birth_date', 'created_at', 'updated_at'], 'safe'],
+
+            [['id', 'gender_id'], 'integer'],
+            [['first_name', 'last_name', 'birthdate', 'genderName','userId'], 'safe'],
+
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
+
+    public function attributeLabels()
     {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        return [
+            'gender_id' => 'Gender',
+        ];
     }
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
     public function search($params)
     {
         $query = Profile::find();
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'first_name',
+                'last_name',
+                'birthdate',
+                'genderName' => [
+                    'asc' => ['gender.gender_name' => SORT_ASC],
+                    'desc' => ['gender.gender_name' => SORT_DESC],
+                    'label' => 'Gender'
+                ],
+                'profileIdLink' => [
+                    'asc' => ['profile.id' => SORT_ASC],
+                    'desc' => ['Profile.id' => SORT_DESC],
+                    'label' => 'ID'
+                ],
+                'userLink' => [
+                    'asc' => ['user.username' => SORT_ASC],
+                    'desc' => ['user.username' => SORT_DESC],
+                    'label' => 'User'
+                ],
+            ]
+        ]);
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+        if (!($this->load($params) && $this->validate())) {
+
+            $query->joinWith(['gender'])
+                ->joinWith(['user']);
+
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'birth_date' => $this->birth_date,
-            'gender_id' => $this->gender_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+        $this->addSearchParameter($query, 'id');
+        $this->addSearchParameter($query, 'first_name', true);
+        $this->addSearchParameter($query, 'last_name', true);
+        $this->addSearchParameter($query, 'birthdate');
+        $this->addSearchParameter($query, 'gender_id');
+        $this->addSearchParameter($query, 'created_at');
+        $this->addSearchParameter($query, 'updated_at');
+        $this->addSearchParameter($query, 'user_id');
 
-        $query->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'last_name', $this->last_name]);
+// filter by gender name
+
+        $query->joinWith(['gender' => function ($q) {
+
+            $q->andFilterWhere(['=', 'gender.gender_name', $this->genderName]);
+
+        }])
+
+// filter by user
+
+            ->joinWith(['user' => function ($q) {
+
+                $q->andFilterWhere(['=', 'user.id', $this->user]);
+
+            }]);
 
         return $dataProvider;
     }
+
+    protected function addSearchParameter($query, $attribute, $partialMatch = false)
+    {
+        if (($pos = strrpos($attribute, '.')) !== false) {
+            $modelAttribute = substr($attribute, $pos + 1);
+        } else {
+            $modelAttribute = $attribute;
+        }
+
+        $value = $this->$modelAttribute;
+        if (trim($value) === '') {
+            return;
+        }
+
+        /*
+         * The following line is additionally added for right aliasing
+         * of columns so filtering happen correctly in the self join
+         */
+
+        $attribute = "profile.$attribute";
+
+        if ($partialMatch) {
+            $query->andWhere(['like', $attribute, $value]);
+        } else {
+            $query->andWhere([$attribute => $value]);
+        }
+    }
+
 }

@@ -4,21 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use common\models\PermissionHelpers;
 
-/**
- * @var yii\web\View $this
- * @var backend\models\Profile $model
- */
+/* @var $this yii\web\View */
+/* @var $model backend\models\User */
 
-$this->title = $model->user->username;
-$show_this_nav = PermissionHelpers::requireMinimumRole('Admin');
+$this->title = $model->username;
+$show_this_nav = PermissionHelpers::requireMinimumRole('SuperUser');
 
-$this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="profile-view">
+<div class="user-view">
 
-    <h1>Profile:  <?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
+
     <p>
+
         <?php if (!Yii::$app->user->isGuest && $show_this_nav) {
             echo Html::a('Update', ['update', 'id' => $model->id],
                 ['class' => 'btn btn-primary']);}?>
@@ -31,19 +31,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     'method' => 'post',
                 ],
             ]);}?>
+
     </p>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            ['attribute'=>'userLink', 'format'=>'raw'],
-            'first_name',
-            'last_name',
-            'birth_date',
-            'gender.gender_name',
+            ['attribute'=>'profileLink', 'format'=>'raw'],
+
+            //'username',
+            //'auth_key',
+            //'password_hash',
+            //'password_reset_token',
+            'email:email',
+            'roleName',
+            'statusName',
+            'userTypeName',
             'created_at',
             'updated_at',
             'id',
         ],
-    ])?>
+    ]) ?>
 
 </div>

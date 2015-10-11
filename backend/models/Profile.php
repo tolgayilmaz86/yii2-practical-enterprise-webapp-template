@@ -168,5 +168,4 @@ class Profile extends ActiveRecord
         $options = [];
         return Html::a($this->id, $url, $options);
     }
-
 }

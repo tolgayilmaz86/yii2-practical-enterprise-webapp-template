@@ -7,6 +7,8 @@
  */
 namespace common\models;
 
+use Yii;
+
 use \backend\models\Role;
 use \backend\models\User;
 use \backend\models\Status;

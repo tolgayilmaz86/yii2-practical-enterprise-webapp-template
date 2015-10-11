@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Configuration;
-use yii\data\ActiveDataProvider;
+use backend\models\User;
+use backend\models\search\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use common\models\PermissionHelpers;
 /**
- * ConfigurationController implements the CRUD actions for Configuration model.
+ * UserController implements the CRUD actions for User model.
  */
-class ConfigurationController extends Controller
+class UserController extends Controller
 {
     public function behaviors()
     {
@@ -55,23 +55,28 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Lists all Configuration models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Configuration::find(),
-        ]);
+        $name = Yii::$app->user->identity->username;
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => User::find(),
+//        ]);
 
         return $this->render('index', [
+            'name' => $name,
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Configuration model.
-     * @param string $id
+     * Displays a single User model.
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -82,16 +87,16 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Creates a new Configuration model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Configuration();
+        $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->conf_key]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -100,9 +105,9 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Updates an existing Configuration model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -110,7 +115,7 @@ class ConfigurationController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->conf_key]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -119,9 +124,9 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Deletes an existing Configuration model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -132,15 +137,15 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Finds the Configuration model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Configuration the loaded model
+     * @param integer $id
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Configuration::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
