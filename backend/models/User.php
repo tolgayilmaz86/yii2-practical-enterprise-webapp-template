@@ -18,6 +18,7 @@ use yii\helpers\Html;
  * @property string $password_reset_token
  * @property string $email
  * @property string $auth_key
+ * @property string $lang
  * @property integer $role_id
  * @property integer $status_id
  * @proprty integer $user_type_id
@@ -75,6 +76,9 @@ class User extends ActiveRecord implements IdentityInterface
             ['username', 'required'],
             ['username', 'unique'],
             ['username', 'string', 'min' => 4, 'max' => 64],
+
+            ['lang', 'default', 'value' => 'en'],
+            ['lang', 'string', 'min' => 2, 'max' => 2],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
@@ -436,5 +440,17 @@ class User extends ActiveRecord implements IdentityInterface
         ]);
         $options = [];
         return Html::a($this->username, $url, $options);
+    }
+
+    /**
+     * @getLang
+     *
+     */
+    public function getLang()
+    {
+        $lang = User::find('lang')
+                ->where(['id' => $this->Id])
+                ->one();
+        return $lang;
     }
 }

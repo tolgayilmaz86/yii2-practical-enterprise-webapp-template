@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Configuration */
+/* @var $model common\models\StatusMessage */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Configurations', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Status Messages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="configuration-view">
+<div class="status-message-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,9 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'conf_key',
-            'conf_value',
-            'class_name',
+            'controller_name',
+            'action_name',
+            'status_message_name',
+            'subject',
+            'body:ntext',
+            'status_message_description',
+            'created_at',
+            'updated_at',
         ],
     ]) ?>
 

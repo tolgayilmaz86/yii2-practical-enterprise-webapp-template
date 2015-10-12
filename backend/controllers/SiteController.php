@@ -14,6 +14,8 @@ use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use common\models\PermissionHelpers;
 use common\models\MenuHelpers;
+use common\models\MailCall;
+use common\models\Configuration;
 
 /**
  * Site controller
@@ -67,6 +69,10 @@ class SiteController extends Controller
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->loginAdmin()) {
+            if(Configuration::getValue('mail_on_login')){
+                MailCall::onMailableAction('login', 'site');
+            }
+//            Yii::$app->language = Yii::$app->user->lang;
             return $this->goBack();
         } else {
             return $this->render('login', [
@@ -157,6 +163,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
+                    MailCall::onMailableAction('signup', 'site');
                     return $this->goHome();
                 }
             }

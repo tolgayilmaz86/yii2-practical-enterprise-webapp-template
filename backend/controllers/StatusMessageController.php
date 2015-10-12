@@ -3,28 +3,28 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Configuration;
-use backend\models\search\ConfigurationSearch;
+use common\models\StatusMessage;
+use backend\models\search\StatusMessageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\MenuHelpers;
 use common\models\PermissionHelpers;
-
+use common\models\MenuHelpers;
 /**
- * ConfigurationController implements the CRUD actions for Configuration model.
+ * StatusMessageController implements the CRUD actions for StatusMessage model.
  */
-class ConfigurationController extends Controller
+class StatusMessageController extends Controller
 {
     public function behaviors()
     {
         return [
+
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
                 'only' => ['index', 'view','create', 'update', 'delete'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'create', 'view',],
+                        'actions' => ['index', 'create', 'update', 'view',],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -33,7 +33,7 @@ class ConfigurationController extends Controller
                         }
                     ],
                     [
-                        'actions' => [ 'update', 'delete'],
+                        'actions' => [ 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -56,13 +56,13 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Lists all Configuration models.
+     * Lists all StatusMessage models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('configuration','','index');
-        $searchModel = new ConfigurationSearch();
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('statusMessageController','','index');
+        $searchModel = new StatusMessageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -72,27 +72,27 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Displays a single Configuration model.
+     * Displays a single StatusMessage model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('configuration','','view');
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('statusMessageController',$id,'view');
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Configuration model.
+     * Creates a new StatusMessage model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('configuration','','create');
-        $model = new Configuration();
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('statusMessageController','','create');
+        $model = new StatusMessage();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -104,14 +104,14 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Updates an existing Configuration model.
+     * Updates an existing StatusMessage model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
-        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('configuration','','update');
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('statusMessageController',$id,'update');
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -124,29 +124,29 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Deletes an existing Configuration model.
+     * Deletes an existing StatusMessage model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('configuration','','delete');
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('statusMessageController','','delete');
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Configuration model based on its primary key value.
+     * Finds the StatusMessage model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Configuration the loaded model
+     * @return StatusMessage the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Configuration::findOne($id)) !== null) {
+        if (($model = StatusMessage::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

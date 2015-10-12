@@ -52,7 +52,7 @@ Class MenuHelpers
                         'icon' => 'plus'
                     ],
                     [
-                        'url' => '/user/view/'.$id,
+                        'url' => '/user/view/'.Yii::$app->user->id,
                         'label' => 'View',
                         'icon' => 'eye-open'
                     ],
@@ -71,6 +71,18 @@ Class MenuHelpers
                 ];
                 break;
             case 'configuration':
+                $menuItems = [
+                    [
+                        'url' => '/configuration/',
+                        'label' => 'Search',
+                        'icon' => 'search'
+                    ],
+                    [
+                        'url' => '/configuration/create/',
+                        'label' => 'Create',
+                        'icon' => 'plus'
+                    ],
+                ];
                 break;
             case 'permission':
                 break;

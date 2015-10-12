@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Configuration */
+/* @var $model common\models\StatusMessage */
 
-$this->title = 'Create Configuration';
-$this->params['breadcrumbs'][] = ['label' => 'Configurations', 'url' => ['index']];
+$this->title = 'Create Status Message';
+$this->params['breadcrumbs'][] = ['label' => 'Status Messages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="configuration-create">
+<div class="status-message-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

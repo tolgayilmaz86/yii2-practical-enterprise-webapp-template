@@ -65,7 +65,10 @@ FontAwesomeAsset::register($this);
                     $menus['items'] = [
                         ['label' => 'Home', 'active'=>true, 'url'   => '/site/'],
                         ['label' => 'Users', 'active'=>true, 'url'  => '/user/'],
-                        ['label' => 'Configurations', 'active'=>true,
+                        ['label' => 'Logs', 'active'=>true, 'url'  => '/log/'],
+                        ['label' => 'Reports', 'active'=>true, 'url'  => '/report/'],
+                        ['label' => 'Status Messages', 'active'=>true,'url' => 'status-message/index'],
+                        ['label' => 'Configurations', 'active'=>true,'url' => '/configuration/view',
                             'items' => [
                                 ['label' => 'List', 'url'           => '/configuration/'],
                                 ['label' => 'Add', 'url'            => '/configuration/create'],
@@ -79,10 +82,11 @@ FontAwesomeAsset::register($this);
                                     ['label' => 'Usage', 'url'      => '/configuration/usage'],
                                     ['label' => 'Security', 'url'   => '/configuration/security'],
                                     ['label' => 'URLs', 'url'       => '/configuration/urls'],
+                                    ['label' => 'E-Mail', 'url'       => '/configuration/email'],
                                     ['label' => 'Maintenance', 'url' => '/configuration/maintenance'],
                                 ]],
                             ],
-                            'url' => '/configuration/view'],
+                        ],
                         '<li class="divider"></li>',
                         [
                             'label' => 'Logout (' . Yii::$app->user->identity->username . ')','active'=>true,

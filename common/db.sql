@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `yii2advanced` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `yii2advanced`;
 -- MySQL dump 10.13  Distrib 5.6.24, for linux-glibc2.5 (x86_64)
 --
 -- Host: 127.0.0.1    Database: yii2advanced
@@ -59,10 +57,12 @@ DROP TABLE IF EXISTS `configuration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `configuration` (
-  `conf_key` varchar(255) NOT NULL,
-  `conf_value` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`conf_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
+  `conf_key` varchar(255) DEFAULT NULL,
+  `conf_value` longtext,
+  `class_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,6 +71,7 @@ CREATE TABLE `configuration` (
 
 LOCK TABLES `configuration` WRITE;
 /*!40000 ALTER TABLE `configuration` DISABLE KEYS */;
+INSERT INTO `configuration` VALUES (1,'asdsdsad','fsdfdsfs','eeeee'),(2,'dfsdf','asdasd',NULL),(3,'aaaa','ddddd',NULL),(4,'deneme','deneee','');
 /*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,4 +445,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-12 14:31:58
+-- Dump completed on 2015-10-12 17:47:15
