@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Configuration */
+/* @var $model backend\models\Address */
 
-$this->title = 'Add Configuration';
-$this->params['breadcrumbs'][] = ['label' => 'Configurations', 'url' => ['index']];
+$this->title = 'Create Address';
+$this->params['breadcrumbs'][] = ['label' => 'Addresses', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="configuration-create">
+<div class="address-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

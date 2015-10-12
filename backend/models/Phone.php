@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "phone".
@@ -73,6 +74,6 @@ class Phone extends \yii\db\ActiveRecord
      */
     public function getTypeList() {
         $droptions = PhoneType::find()->asArray()->all();
-        return Arrayhelper::map($droptions, 'type', 'id');
+        return ArrayHelper::map($droptions, 'type', 'id');
     }
 }

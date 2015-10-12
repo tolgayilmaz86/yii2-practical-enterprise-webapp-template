@@ -31,64 +31,69 @@ FontAwesomeAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
-        if (!Yii::$app->user->isGuest){
-            $is_admin = PermissionHelpers::requireMinimumRole('Admin');
-            $menus['options'] = ['class'=>'nav nav-pills fa'];
-        } else {
-            NavBar::begin([
-                'brandLabel' => '64BitLabs',
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
-            ]);
-            $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-            echo NavX::widget([
-                'options' => ['class' => 'nav nav-pills fa'],
-                'items' => $menuItems,
-            ]);
-            NavBar::end();
-        }
-
-        if (!Yii::$app->user->isGuest && $is_admin) {
-            $menus['items'] = [
-                ['label' => 'Home', 'active'=>true, 'url' => '/site/index'],
-                ['label' => 'Users', 'active'=>true],
-                ['label' => 'Configurations', 'active'=>true,
-                    'items' => [
-                        ['label' => 'Add', 'url' => '/configuration/create'],
-                        ['label' => 'Update', 'url' => '/configuration/update'],
-                        ['label' => 'Roles', 'url' => '/role/index'],
-                        ['label' => 'Statuses', 'url' => '/configuration/status'],
-                        ['label' => 'Permissions', 'url' => '/configuration/permissions'],
-                        ['label' => 'User Types', 'url' => '/user-type/index'],
-                        '<li class="divider"></li>',
-                        ['label' => 'Site', 'items' => [
-                            ['label' => 'Usage', 'url' => '/configuration/usage'],
-                            ['label' => 'Security', 'url' => '/configuration/security'],
-                            ['label' => 'URLs', 'url' => '/configuration/urls'],
-                            '<li class="divider"></li>',
-                            ['label' => 'Maintenance', 'url' => '/configuration/maintenance'],
-                        ]],
+    <div class="navbar">
+        <div class="col-sm-12">
+            <?php
+            if (!Yii::$app->user->isGuest){
+                $is_admin = PermissionHelpers::requireMinimumRole('Admin');
+                $menus['options'] = ['class'=>'nav nav-pills fa'];
+            } else {
+                NavBar::begin([
+                    'brandLabel' => '64BitLabs',
+                    'brandUrl' => Yii::$app->homeUrl,
+                    'options' => [
+                        'class' => 'navbar-inverse navbar-fixed-top',
                     ],
-                    'url' => '/configuration/view'],
-                '<li class="divider"></li>',
-                [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')','active'=>true,
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ],
-            ];
-            echo NavX::widget($menus);
-        }
-    ?>
+                ]);
+                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+                echo NavX::widget([
+                    'options' => ['class' => 'nav nav-pills fa'],
+                    'items' => $menuItems,
+                ]);
+                NavBar::end();
+            }
 
+            if (!Yii::$app->user->isGuest && $is_admin) {
+                $menus['items'] = [
+                    ['label' => 'Home', 'active'=>true, 'url'   => '/site/index'],
+                    ['label' => 'Users', 'active'=>true, 'url'  => '/user/search'],
+                    ['label' => 'Configurations', 'active'=>true,
+                        'items' => [
+                            ['label' => 'Add', 'url'            => '/configuration/create'],
+                            ['label' => 'Update', 'url'         => '/configuration/update'],
+                            ['label' => 'Roles', 'url'          => '/role/index'],
+                            ['label' => 'Statuses', 'url'       => '/configuration/status'],
+                            ['label' => 'Permissions', 'url'    => '/configuration/permissions'],
+                            ['label' => 'User Types', 'url'     => '/user-type/index'],
+                            '<li class="divider"></li>',
+                            ['label' => 'Site', 'items' => [
+                                ['label' => 'Usage', 'url'      => '/configuration/usage'],
+                                ['label' => 'Security', 'url'   => '/configuration/security'],
+                                ['label' => 'URLs', 'url'       => '/configuration/urls'],
+                                '<li class="divider"></li>',
+                                ['label' => 'Maintenance', 'url' => '/configuration/maintenance'],
+                            ]],
+                        ],
+                        'url' => '/configuration/view'],
+                    '<li class="divider"></li>',
+                    [
+                        'label' => 'Logout (' . Yii::$app->user->identity->username . ')','active'=>true,
+                        'url' => ['/site/logout'],
+                        'linkOptions' => ['data-method' => 'post']
+                    ],
+                ];
+                echo NavX::widget($menus);
+            }
+            ?>
+        </div>
+    </div>
+    <div id="navBar" class="col-sm-2">
+        <?php $this->beginContent('@backend/views/layouts/sidebar.php'); ?>
+
+        <?php $this->endContent(); ?>
+    </div>
     <div class="container">
-
-    <?php $this->render('//layouts/sidebar'); ?>
-
-        <div id="content" class="span-16">
+        <div id="content" >
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
