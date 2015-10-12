@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\PermissionHelpers;
+use common\models\MenuHelpers;
 /**
  * UserController implements the CRUD actions for User model.
  */
@@ -66,7 +67,7 @@ class UserController extends Controller
 //        $dataProvider = new ActiveDataProvider([
 //            'query' => User::find(),
 //        ]);
-
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('user','','index');
         return $this->render('index', [
             'name' => $name,
             'searchModel' => $searchModel,
@@ -81,6 +82,7 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('user',$id,'view');
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -93,6 +95,7 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('user','','create');
         $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -112,6 +115,7 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('user',$id,'update');
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -131,6 +135,7 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('user',$id,'delete');
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

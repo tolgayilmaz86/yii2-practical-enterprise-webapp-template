@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\PermissionHelpers;
 use backend\models\search\ProfileSearch;
+use common\models\MenuHelpers;
 
 /**
  * ProfileController implements the CRUD actions for Profile model.
@@ -71,6 +72,7 @@ class ProfileController extends Controller
      */
     public function actionIndex()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('profile','','index');
         //if userHas evaluates true, it returns to the view file,
         // with the correct model instance held in the variable $already_exists
         //if($already_exists = Profile::find()->where(['user_id' => Yii::$app->user->identity->id])->one())
@@ -105,6 +107,7 @@ class ProfileController extends Controller
      */
     public function actionView($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('profile','','view');
         if ($already_exists = RecordHelpers::userHas('profile')) {
             return $this->render('view', [
                 'model' => $this->findModel($already_exists),
@@ -121,6 +124,7 @@ class ProfileController extends Controller
      */
     public function actionCreate()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('profile','','create');
         // We start by calling a new instance of the model,
         // then we set the user_id attribute of the model to the current user
         $model = new Profile;
@@ -160,6 +164,7 @@ class ProfileController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('profile','','update');
         // I did that because I felt that since the variable name was $model, it was a little more syntactically
         // logical to follow that with the model name we are interested in, instead of the helper class
         if($model =  Profile::find()->where(['user_id' => Yii::$app->user->identity->id])->one())
@@ -184,6 +189,7 @@ class ProfileController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('profile','','delete');
         $model = Profile::find()->where([
                 'user_id' => Yii::$app->user->identity->id
             ])->one();

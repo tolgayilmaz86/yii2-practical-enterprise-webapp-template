@@ -59,7 +59,7 @@ DROP TABLE IF EXISTS `configuration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `configuration` (
-  `conf_key` varchar(45) NOT NULL,
+  `conf_key` varchar(255) NOT NULL,
   `conf_value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`conf_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -288,7 +288,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES (1,1,'tolga','yilmaz','1986-10-10',2,'0000-00-00 00:00:00','2015-10-09 17:04:53');
+INSERT INTO `profile` VALUES (1,1,'tolga','yilmaz','1986-10-10',1,'0000-00-00 00:00:00','2015-10-12 14:12:22');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,4 +444,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-09 17:11:43
+-- Dump completed on 2015-10-12 14:31:58

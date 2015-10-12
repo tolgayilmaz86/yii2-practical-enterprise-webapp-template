@@ -3,49 +3,21 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Status;
-use backend\models\search\StatusSearch;
+use backend\models\Phone;
+use backend\models\search\PhoneSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\PermissionHelpers;
 use common\models\MenuHelpers;
+
 /**
- * StatusController implements the CRUD actions for Status model.
+ * PhoneController implements the CRUD actions for Phone model.
  */
-class StatusController extends Controller
+class PhoneController extends Controller
 {
     public function behaviors()
     {
         return [
-
-            'access' => [
-                'class' => \yii\filters\AccessControl::className(),
-                'only' => ['index', 'view','create', 'update', 'delete'],
-                'rules' => [
-                    [
-                        'actions' => ['index', 'create', 'view',],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            return PermissionHelpers::requireMinimumRole('Admin')
-                            && PermissionHelpers::requireStatus('Active');
-                        }
-                    ],
-                    [
-                        'actions' => [ 'update', 'delete'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            return PermissionHelpers::requireMinimumRole('SuperUser')
-                            && PermissionHelpers::requireStatus('Active');
-                        }
-                    ],
-
-                ],
-
-            ],
-
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -56,13 +28,13 @@ class StatusController extends Controller
     }
 
     /**
-     * Lists all Status models.
+     * Lists all Phone models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('status','','index');
-        $searchModel = new StatusSearch();
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('phone','','index');
+        $searchModel = new PhoneSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -72,27 +44,27 @@ class StatusController extends Controller
     }
 
     /**
-     * Displays a single Status model.
+     * Displays a single Phone model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('status',$id,'index');
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('phone','','view');
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Status model.
+     * Creates a new Phone model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('status','','index');
-        $model = new Status();
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('phone','','create');
+        $model = new Phone();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -104,14 +76,14 @@ class StatusController extends Controller
     }
 
     /**
-     * Updates an existing Status model.
+     * Updates an existing Phone model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
-        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('status',$id,'index');
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('phone','','update');
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -124,29 +96,29 @@ class StatusController extends Controller
     }
 
     /**
-     * Deletes an existing Status model.
+     * Deletes an existing Phone model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('status',$id,'index');
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('phone','','delete');
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Status model based on its primary key value.
+     * Finds the Phone model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Status the loaded model
+     * @return Phone the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Status::findOne($id)) !== null) {
+        if (($model = Phone::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -5,11 +5,11 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Role;
 use backend\models\search\RoleSearch;
-use common\models\PermissionHelpers;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use common\models\PermissionHelpers;
+use common\models\MenuHelpers;
 /**
  * RoleController implements the CRUD actions for Role model.
  */
@@ -61,8 +61,11 @@ class RoleController extends Controller
      */
     public function actionIndex()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('role','','index');
         $searchModel = new RoleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('role','');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -77,6 +80,7 @@ class RoleController extends Controller
      */
     public function actionView($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('role','','view');
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -89,6 +93,7 @@ class RoleController extends Controller
      */
     public function actionCreate()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('role','','create');
         $model = new Role();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -108,6 +113,7 @@ class RoleController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('role','','update');
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -127,6 +133,7 @@ class RoleController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('role','','delete');
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

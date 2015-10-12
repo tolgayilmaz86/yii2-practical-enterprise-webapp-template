@@ -8,7 +8,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use common\models\MenuHelpers;
+use common\models\PermissionHelpers;
 /**
  * ConfigurationController implements the CRUD actions for Configuration model.
  */
@@ -60,6 +61,7 @@ class ConfigurationController extends Controller
      */
     public function actionIndex()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('configuration','','index');
         $dataProvider = new ActiveDataProvider([
             'query' => Configuration::find(),
         ]);
@@ -76,6 +78,7 @@ class ConfigurationController extends Controller
      */
     public function actionView($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('configuration','','view');
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -88,6 +91,7 @@ class ConfigurationController extends Controller
      */
     public function actionCreate()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('configuration','','create');
         $model = new Configuration();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -107,6 +111,7 @@ class ConfigurationController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('configuration','','update');
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -126,6 +131,7 @@ class ConfigurationController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('configuration','','delete');
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

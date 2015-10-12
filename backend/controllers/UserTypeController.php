@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\PermissionHelpers;
+use common\models\MenuHelpers;
 /**
  * UserTypeController implements the CRUD actions for UserType model.
  */
@@ -60,6 +61,7 @@ class UserTypeController extends Controller
      */
     public function actionIndex()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('user-type','','index');
         $searchModel = new UserTypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -76,6 +78,7 @@ class UserTypeController extends Controller
      */
     public function actionView($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('user-type',$id,'view');
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -88,6 +91,7 @@ class UserTypeController extends Controller
      */
     public function actionCreate()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('user-type','','create');
         $model = new UserType();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -107,6 +111,7 @@ class UserTypeController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('user-type',$id,'update');
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -126,6 +131,7 @@ class UserTypeController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('user-type',$id,'delete');
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

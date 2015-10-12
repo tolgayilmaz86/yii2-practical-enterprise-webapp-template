@@ -13,6 +13,7 @@ use backend\models\ContactForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use common\models\PermissionHelpers;
+use common\models\MenuHelpers;
 
 /**
  * Site controller
@@ -92,6 +93,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('site','','index');
         return $this->render('index');
     }
 
@@ -115,6 +117,7 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('site','','contact');
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
@@ -138,6 +141,7 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('site','','about');
         return $this->render('about');
     }
 
@@ -148,6 +152,7 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('site','','signup');
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
