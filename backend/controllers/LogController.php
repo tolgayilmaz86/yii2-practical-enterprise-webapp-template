@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Log;
+use common\models\MenuHelpers;
 use backend\models\search\LogSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -32,6 +33,7 @@ class LogController extends Controller
      */
     public function actionIndex()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('log','','index');
         $searchModel = new LogSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -48,6 +50,7 @@ class LogController extends Controller
      */
     public function actionView($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('log',$id,'view');
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -60,6 +63,7 @@ class LogController extends Controller
      */
     public function actionCreate()
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('log','','create');
         $model = new Log();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -79,6 +83,7 @@ class LogController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('log',$id,'update');
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -98,6 +103,7 @@ class LogController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->view->params['menuItems'] = MenuHelpers::getSideMenuItems('log','','delete');
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

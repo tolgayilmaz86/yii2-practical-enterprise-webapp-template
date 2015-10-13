@@ -37,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-//            'id',
             'faq_question',
             'faq_answer',
             ['attribute'=>'faqCategoryName', 'format'=>'raw'],

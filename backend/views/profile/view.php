@@ -42,7 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'gender.gender_name',
             'created_at',
             'updated_at',
-            'id',
         ],
     ])?>
 

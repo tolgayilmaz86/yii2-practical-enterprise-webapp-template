@@ -35,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
             ['attribute'=>'userIdLink', 'format'=>'raw'],
             ['attribute'=>'userLink', 'format'=>'raw'],
             ['attribute'=>'profileLink', 'format'=>'raw'],
@@ -47,11 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
-
-
-            // 'updated_at',
-
-
         ],
     ]); ?>
 

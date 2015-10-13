@@ -49,7 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'userTypeName',
             'created_at',
             'updated_at',
-            'id',
         ],
     ]) ?>
 

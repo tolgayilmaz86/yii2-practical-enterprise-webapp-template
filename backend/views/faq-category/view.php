@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-//            'id',
             'faq_category_name',
             'faq_category_weight',
             ['attribute'=>'faq_category_is_featured', 'format'=>'boolean'],

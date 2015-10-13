@@ -36,7 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-//            'id',
             'faq_category_name',
             'faq_category_weight',
             ['attribute'=>'faq_category_is_featured', 'format'=>'boolean'],
