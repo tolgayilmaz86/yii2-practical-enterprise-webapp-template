@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use common\models\PermissionHelpers;
+use components\FaqWidget;
 
 /**
  * @var yii\web\View $this
@@ -121,6 +122,11 @@ $is_admin = PermissionHelpers::requireMinimumRole('Admin');
                     ?>
                 </p>
             </div>
+        </div>
+
+        <div>
+            <?= FaqWidget::widget(['settings' => ['pageSize' => 3,
+                                    'featuredOnly' => true]]) ?>
         </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\ConfigurationSearch */
@@ -20,17 +20,19 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?= GridView::widget([
+        'responsiveWrap' => false,
+        'hover' => true,
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-//            'id',
+            ['class' => 'kartik\grid\SerialColumn'],
             'conf_key',
-            'conf_value',
+            ['attribute' => 'conf_value',
+                'class' => 'kartik\grid\DataColumn',
+                'contentOptions' => ['style'=>'max-width:400px; overflow: auto; word-wrap: break-word;']
+            ],
             'class_name',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'kartik\grid\ActionColumn'],
         ],
     ]); ?>
 

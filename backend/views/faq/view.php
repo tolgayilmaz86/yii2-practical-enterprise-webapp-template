@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Configuration */
+/* @var $model common\models\Faq */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Configurations', 'url' => ['index']];
+$this->title = 'FAQ: '. $model->faq_question;
+$this->params['breadcrumbs'][] = ['label' => 'Faqs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="configuration-view">
+<div class="faq-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,9 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
 //            'id',
-            'conf_key',
-            'conf_value',
-            'class_name',
+            'faq_question',
+            'faq_answer',
+            'faqCategory.faq_category_name',
+            'faq_weight',
+            ['attribute'=>'faq_is_featured', 'format'=>'boolean'],
+            ['attribute'=>'createdByUsername', 'format'=>'raw'],
+            ['attribute'=>'updatedByUsername', 'format'=>'raw'],
+            'created_at',
+            'updated_at',
         ],
     ]) ?>
 
