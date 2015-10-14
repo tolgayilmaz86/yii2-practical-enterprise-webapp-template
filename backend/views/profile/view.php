@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profile-view">
 
-    <h1>Profile:  <?= Html::encode($this->title) ?></h1>
+    <h3>Profile:  <?= Html::encode($this->title) ?></h3>
     <p>
         <?php if (!Yii::$app->user->isGuest && $show_this_nav) {
             echo Html::a('Update', ['update', 'id' => $model->id],

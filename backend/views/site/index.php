@@ -14,7 +14,7 @@ $is_admin = PermissionHelpers::requireMinimumRole('Admin');
 
 <div class="site-index">
     <div class="jumbotron">
-        <h1>Welcome</h1>
+        <h3>Welcome</h3>
         <p class="lead">
             Now you can manage users, roles, and more with
             our easy tools.

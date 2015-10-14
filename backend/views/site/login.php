@@ -19,7 +19,7 @@ $this->title = 'Login';
 
                     <span class="glyphicon glyphicon-user"></span>
 
-                    <h1 class=" text-center">Login</h1>
+                    <h3 class=" text-center">Login</h3>
                 </div>
                 <div class="modal-body">
                     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
