@@ -2,22 +2,28 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use \yii\bootstrap\Collapse;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\PhoneSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Phones';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="phone-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo Collapse::widget([
+        'items' => [
+            // equivalent to the above
+            [
+                'label' => 'Search',
+                'content' => $this->render('_search', ['model' => $searchModel]) ,
+                // open its content by default
+                //'contentOptions' => ['class' => 'in']
+            ],
 
-    <p>
-        <?= Html::a('Create Phone', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+        ]
+    ]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

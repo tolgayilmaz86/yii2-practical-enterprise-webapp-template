@@ -16,8 +16,6 @@ use backend\models\User;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
     <?= $form->field($model, 'username') ?>
 
     <?php echo $form->field($model, 'email') ?>

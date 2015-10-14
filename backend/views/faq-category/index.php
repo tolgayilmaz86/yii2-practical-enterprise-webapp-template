@@ -7,12 +7,9 @@ use \yii\bootstrap\Collapse;
 /* @var $searchModel backend\models\search\FaqCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Faq Categories';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="faq-category-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?php   echo Collapse::widget([
         'items' => [

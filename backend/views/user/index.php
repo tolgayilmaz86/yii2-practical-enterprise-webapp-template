@@ -1,28 +1,31 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use \yii\bootstrap\Collapse;
+use \kartik\sidenav\SideNav;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?php echo Collapse::widget([
         'items' => [
             // equivalent to the above
             [
+                'rowOptions' => function ($model, $key, $index, $grid) {
+                    return ['id' => $model['id'], 'onclick' => 'alert(this.id);'];
+                },
+                'icon' => 'search',
                 'label' => 'Search',
                 'content' => $this->render('_search', ['model' => $searchModel]) ,
+//                'options' =>['class' => 'panel-info','icon' => 'search'],
                 // open its content by default
-                //'contentOptions' => ['class' => 'in']
+//                'contentOptions' => ['class' => 'in']
             ],
 
         ]
@@ -32,12 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            ['attribute'=>'userIdLink', 'format'=>'raw'],
-            ['attribute'=>'userLink', 'format'=>'raw'],
-            ['attribute'=>'profileLink', 'format'=>'raw'],
+        'columns' => [
+            ['class' => 'kartik\grid\SerialColumn'],
+
+            ['attribute'=>'userIdLink', 'format'=>'raw','contentOptions' => ['style'=>'max-width:400px; overflow: auto; word-wrap: break-word;'],],
+            ['attribute'=>'userLink', 'format'=>'raw','contentOptions' => ['style'=>'max-width:400px; overflow: auto; word-wrap: break-word;'],],
+            ['attribute'=>'profileLink', 'format'=>'raw','contentOptions' => ['style'=>'max-width:400px; overflow: auto; word-wrap: break-word;'],],
 
             'email:email',
             'roleName',
@@ -45,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'statusName',
             'created_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'kartik\grid\ActionColumn'],
         ],
     ]); ?>
 

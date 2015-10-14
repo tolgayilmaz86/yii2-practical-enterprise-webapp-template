@@ -8,12 +8,10 @@ use \yii\bootstrap\Collapse;
 /* @var $searchModel backend\models\search\FaqSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Faqs';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="faq-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php echo Collapse::widget([
         'items' => [
             // equivalent to the above
@@ -26,10 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ]
     ]); ?>
-
-    <p>
-        <?= Html::a('Create Faq', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

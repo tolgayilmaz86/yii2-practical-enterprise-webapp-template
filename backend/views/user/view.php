@@ -8,7 +8,7 @@ use common\models\PermissionHelpers;
 /* @var $model backend\models\User */
 
 $this->title = $model->username;
-$show_this_nav = PermissionHelpers::requireMinimumRole('SuperUser');
+$show_this_nav = PermissionHelpers::requireMinimumRole('Admin');
 
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,9 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-
         <?php if (!Yii::$app->user->isGuest && $show_this_nav) {
             echo Html::a('Update', ['update', 'id' => $model->id],
+                ['class' => 'btn btn-primary']);}?>
+
+        <?php if (!Yii::$app->user->isGuest && $show_this_nav) {
+            echo Html::a('Phone', ['phone', 'id' => $model->id],
+                ['class' => 'btn btn-primary']);}?>
+
+        <?php if (!Yii::$app->user->isGuest && $show_this_nav) {
+            echo Html::a('Addresses', ['../address/view', 'id' => $model->id],
                 ['class' => 'btn btn-primary']);}?>
 
         <?php if (!Yii::$app->user->isGuest && $show_this_nav) {
@@ -31,13 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'method' => 'post',
                 ],
             ]);}?>
-
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             ['attribute'=>'profileLink', 'format'=>'raw'],
+            ['attribute'=>'addressLink', 'format'=>'raw'],
 
             //'username',
             //'auth_key',

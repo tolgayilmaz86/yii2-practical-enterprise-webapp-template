@@ -49,7 +49,7 @@ class Configuration extends \yii\db\ActiveRecord
     public static function getValue($key){
         $connection = \Yii::$app->db;
 
-        $sql = "SELECT conf_value FROM configuraiton WHERE conf_key=:key";
+        $sql = "SELECT conf_value FROM configuration WHERE conf_key=:key";
 
         $command = $connection->createCommand($sql);
         $command->bindValue(":key", $key);

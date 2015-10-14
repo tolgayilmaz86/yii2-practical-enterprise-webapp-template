@@ -63,7 +63,7 @@ class Profile extends ActiveRecord
             'updated_at' => 'Updated At',
             'genderName' => Yii::t('app', 'Gender'),
             'userLink' => Yii::t('app', 'User'),
-            'profileIdLink' => Yii::t('app', 'Profile'),
+            'profileIdLink' => Yii::t('app', 'Profile')
         ];
     }
 

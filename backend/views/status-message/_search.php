@@ -15,19 +15,15 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'controller_name') ?>
-
     <?= $form->field($model, 'action_name') ?>
 
     <?= $form->field($model, 'status_message_name') ?>
 
     <?= $form->field($model, 'subject') ?>
 
-    <?php // echo $form->field($model, 'body') ?>
+    <?= $form->field($model, 'body') ?>
 
-    <?php // echo $form->field($model, 'status_message_description') ?>
+    <?= $form->field($model, 'status_message_description') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

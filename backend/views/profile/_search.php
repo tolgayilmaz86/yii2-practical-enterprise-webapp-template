@@ -16,8 +16,6 @@ use backend\models\Profile;
         'method' => 'get',
     ]); ?>
 
-
-
     <?= $form->field($model, 'first_name') ?>
 
     <?= $form->field($model, 'last_name') ?>

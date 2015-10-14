@@ -43,7 +43,6 @@ class TestController extends \yii\web\Controller
 
     public function featuredProvider()
     {
-
         $query = new Query;
         $featuredProvider = new ArrayDataProvider([
             'allModels' => $query->from('user')->where(['id' =>1])->all(),

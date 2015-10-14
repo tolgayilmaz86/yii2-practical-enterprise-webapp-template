@@ -97,6 +97,8 @@ class User extends ActiveRecord implements IdentityInterface
             'statusName' => Yii::t('app', 'Status'),
             'profileId' => Yii::t('app', 'Profile'),
             'profileLink' => Yii::t('app', 'Profile'),
+            'address' => Yii::t('app', 'Address'),
+            'phones' => Yii::t('app', 'Phone'),
             'userLink' => Yii::t('app', 'User'),
             'username' => Yii::t('app', 'User'),
             'userTypeName' => Yii::t('app', 'User Type'),
@@ -241,12 +243,24 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @getAddress
      * @return \yii\db\ActiveQuery
      */
-    public function getAddresses() {
+    public function getAddress() {
         return $this->hasMany(Address::className(), [
-            'id' => 'user_id'
+            'user_id' => 'id'
         ]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAddressLink() {
+        $url = Url::to([
+            'address/view', 'id'=>$this->id
+        ]);
+        $options = [];
+        return Html::a($this->address ? 'address' : 'none', $url, $options);
     }
 
     /**
