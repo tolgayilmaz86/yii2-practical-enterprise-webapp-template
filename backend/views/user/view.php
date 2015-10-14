@@ -19,20 +19,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php if (!Yii::$app->user->isGuest && $show_this_nav) {
-            echo Html::a('Update', ['update', 'id' => $model->id],
-                ['class' => 'btn btn-primary']);}?>
+            echo Html::a(' Update', ['update', 'id' => $model->id],
+                ['class' => 'btn btn-primary glyphicon glyphicon-edit']);}?>
 
         <?php if (!Yii::$app->user->isGuest && $show_this_nav) {
-            echo Html::a('Phone', ['phone', 'id' => $model->id],
-                ['class' => 'btn btn-primary']);}?>
+            echo Html::a(' Phone', ['phone', 'id' => $model->id],
+                ['class' => 'btn btn-primary glyphicon glyphicon-phone']);}?>
 
         <?php if (!Yii::$app->user->isGuest && $show_this_nav) {
-            echo Html::a('Addresses', ['../address/view', 'id' => $model->id],
-                ['class' => 'btn btn-primary']);}?>
+            echo Html::a(' Addresses', ['../address/view', 'id' => $model->id],
+                ['class' => 'btn btn-primary glyphicon glyphicon-road']);}?>
 
         <?php if (!Yii::$app->user->isGuest && $show_this_nav) {
-            echo Html::a('Delete', ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
+            echo Html::a(' Delete', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger glyphicon glyphicon-remove',
                 'data' => [
                     'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                     'method' => 'post',
