@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\User */
+/* @var $model common\models\Permission */
 
-$this->title = 'Create User';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = 'Assign Permission';
+$this->params['breadcrumbs'][] = ['label' => 'Permissions', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-create">
+<div class="permission-create">
 
     <h3><?= Html::encode($this->title) ?></h3>
 

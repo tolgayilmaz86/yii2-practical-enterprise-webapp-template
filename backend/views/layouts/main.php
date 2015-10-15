@@ -76,7 +76,7 @@ FontAwesomeAsset::register($this);
                                     ['label' => 'Update', 'url'         => '/configuration/update'],
                                     ['label' => 'Roles', 'url'          => '/role/index'],
                                     ['label' => 'Statuses', 'url'       => '/status/'],
-                                    ['label' => 'Permissions', 'url'    => '/configuration/permissions'],
+                                    ['label' => 'Permissions', 'url'    => '/permission'],
                                     ['label' => 'User Types', 'url'     => '/user-type/index'],
                                     ['label' => 'FAQs', 'url'           => '/faq/index'],
                                     ['label' => 'FAQ Categories', 'url' => '/faq-category/index'],
@@ -114,13 +114,15 @@ FontAwesomeAsset::register($this);
             </div>
         </div>
         <div class="col-xs-4 col-sm-6 com-md-8 col-lg-8">
-            <div class="panel panel-default">
-                <div id="content" >
+            <div class="panel panel-default" >
+                <div id="content" style="padding:1%;">
                     <?= Breadcrumbs::widget([
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                     ]) ?>
                     <?= Alert::widget() ?>
-                    <?= $content ?>
+                    <div style="padding-left:4%; padding-right: 4%">
+                        <?= $content ?>
+                    </div>
                 </div>
             </div>
         </div>

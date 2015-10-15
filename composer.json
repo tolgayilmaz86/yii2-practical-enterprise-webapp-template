@@ -32,7 +32,9 @@
         "kartik-v/yii2-widget-sidenav": "*",
         "fortawesome/font-awesome": "4.2.0",
         "kartik-v/yii2-grid": "@dev",
-        "kartik-v/yii2-mpdf": "dev-master"
+        "kartik-v/yii2-mpdf": "dev-master",
+        "kartik-v/yii2-widget-depdrop": "@dev",
+        "kartik-v/yii2-widgets": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

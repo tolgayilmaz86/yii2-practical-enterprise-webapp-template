@@ -11,7 +11,7 @@ $this->title = $model->username;
 $show_this_nav = PermissionHelpers::requireMinimumRole('Admin');
 
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
 
