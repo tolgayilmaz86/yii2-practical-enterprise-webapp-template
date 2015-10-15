@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `yii2advanced` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `yii2advanced`;
 -- MySQL dump 10.13  Distrib 5.6.24, for linux-glibc2.5 (x86_64)
 --
 -- Host: 127.0.0.1    Database: yii2advanced
@@ -46,6 +48,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES (1,1,'home','abc','def','ffff','07897','local','turkey','ankara',''),(2,1,'work','xxxx','yyy','zzz','09877','international','turkey','istanbul',NULL);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +65,7 @@ CREATE TABLE `configuration` (
   `conf_value` longtext,
   `class_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +74,7 @@ CREATE TABLE `configuration` (
 
 LOCK TABLES `configuration` WRITE;
 /*!40000 ALTER TABLE `configuration` DISABLE KEYS */;
-INSERT INTO `configuration` VALUES (1,'asdsdsad','fsdfdsfs','eeeee'),(2,'dfsdf','asdasd',NULL),(3,'aaaa','ddddd',NULL),(4,'deneme','deneee','');
+INSERT INTO `configuration` VALUES (1,'asdsdsad','fsdfdsfs','eeeee'),(2,'dfsdf','asdasd',NULL),(3,'aaaa','ddddd',NULL),(4,'deneme','deneee',''),(5,'fgff','a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222ffffa111111111111111111111111111111111111111111111111111111111111111111222222ffffffffa111111111111111111111111111111111111111111111111111111111111111111222222asdsada111111111111111111111111111111111111111111111111111111111111111111222222asdasdasda111111111111111111111111111111111111111111111111111111111111111111222222qqqqqqqqqqqqqqqqqa111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222a111111111111111111111111111111111111111111111111111111111111111111222222wwwwwwwwwwwwwwwwwwwwww11111111111111111222222wwwwwwwwwwwwwwwwwwwwww11111111111111111222222wwwwwwwwwwwwwwwwwwwwww11111111111111111222222wwwwwwwwwwwwwwwwwwwwww11111111111111111222222wwwwwwwwwwwwwwwwwwwwww11111111111111111222222wwwwwwwwwwwwwwwwwwwwww11111111111111111222222wwwwwwwwwwwwwwwwwwwwww11111111111111111222222wwwwwwwwwwwwwwwwwwwwwwffff11111111111111111222222wwwwwwwwwwwwwwwwwwwwww11111111111111111222222wwwwwwwwwwwwwwwwwwwwww11111111111111111222222wwwwwwwwwwwwwwwwwwwwwwwwwwwwww','');
 /*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,6 +104,68 @@ INSERT INTO `country` VALUES (1,'US','United States'),(2,'CA','Canada'),(3,'AF',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `faq`
+--
+
+DROP TABLE IF EXISTS `faq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `faq` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `faq_question` varchar(255) NOT NULL,
+  `faq_answer` longtext NOT NULL,
+  `faq_category_id` smallint(4) DEFAULT NULL,
+  `faq_is_featured` bit(1) DEFAULT b'0',
+  `faq_weight` smallint(3) DEFAULT '100',
+  `created_by` int(11) unsigned DEFAULT NULL,
+  `updated_by` int(11) unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_faq_create_user_id_idx` (`created_by`),
+  KEY `fk_faq_update_user_id_idx` (`updated_by`),
+  CONSTRAINT `fk_faq_create_user_id` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_faq_update_user_id` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `faq`
+--
+
+LOCK TABLES `faq` WRITE;
+/*!40000 ALTER TABLE `faq` DISABLE KEYS */;
+INSERT INTO `faq` VALUES (1,'sdfdfsdf','sdfsdfsdfdsf',1,NULL,11,1,1,'2015-10-13 13:22:12','2015-10-13 14:11:26'),(2,'sss','dddd',1,'\0',11,1,1,'2015-10-13 13:24:31',NULL);
+/*!40000 ALTER TABLE `faq` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `faq_category`
+--
+
+DROP TABLE IF EXISTS `faq_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `faq_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `faq_category_name` varchar(45) DEFAULT NULL,
+  `faq_category_is_featured` bit(1) DEFAULT b'0',
+  `faq_category_weight` smallint(3) DEFAULT '100',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `faq_category`
+--
+
+LOCK TABLES `faq_category` WRITE;
+/*!40000 ALTER TABLE `faq_category` DISABLE KEYS */;
+INSERT INTO `faq_category` VALUES (1,'sdfsdfsdf','',12),(2,'asasa','\0',22);
+/*!40000 ALTER TABLE `faq_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `gender`
 --
 
@@ -122,6 +187,61 @@ LOCK TABLES `gender` WRITE;
 /*!40000 ALTER TABLE `gender` DISABLE KEYS */;
 INSERT INTO `gender` VALUES (1,'male'),(2,'female');
 /*!40000 ALTER TABLE `gender` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `log`
+--
+
+DROP TABLE IF EXISTS `log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` smallint(6) unsigned DEFAULT NULL,
+  `description` longtext,
+  `create_date` datetime DEFAULT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `op_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_log_1_idx` (`user_id`),
+  KEY `fk_log_category_idx` (`category_id`),
+  CONSTRAINT `fk_log_category_id` FOREIGN KEY (`category_id`) REFERENCES `log_category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_log_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `log`
+--
+
+LOCK TABLES `log` WRITE;
+/*!40000 ALTER TABLE `log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `log_category`
+--
+
+DROP TABLE IF EXISTS `log_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `log_category` (
+  `id` smallint(6) unsigned NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `description` mediumtext,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `log_category`
+--
+
+LOCK TABLES `log_category` WRITE;
+/*!40000 ALTER TABLE `log_category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `log_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -181,20 +301,24 @@ DROP TABLE IF EXISTS `permission`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `permission` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned DEFAULT NULL,
+  `role_id` smallint(6) unsigned DEFAULT NULL,
+  `status_id` smallint(6) unsigned DEFAULT NULL,
   `main_menu_id` smallint(4) unsigned DEFAULT NULL,
   `submenu_id` smallint(4) unsigned DEFAULT NULL,
-  `create` bit(1) NOT NULL DEFAULT b'1',
-  `update` bit(1) NOT NULL DEFAULT b'1',
   `view` bit(1) NOT NULL DEFAULT b'1',
-  `delete` bit(1) NOT NULL DEFAULT b'1',
+  `list` bit(1) NOT NULL DEFAULT b'1',
+  `update` bit(1) NOT NULL DEFAULT b'0',
+  `create` bit(1) NOT NULL DEFAULT b'0',
+  `delete` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
-  KEY `fk_permission_user_id_idx` (`user_id`),
   KEY `fk_permission_main_menu_id_idx` (`main_menu_id`),
   KEY `fk_permission_submenu_id_idx` (`submenu_id`),
+  KEY `fk_permission_role_id_idx` (`role_id`),
+  KEY `fk_permission_status_id_idx` (`status_id`),
   CONSTRAINT `fk_permission_main_menu_id` FOREIGN KEY (`main_menu_id`) REFERENCES `main_menu` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_permission_submenu_id` FOREIGN KEY (`submenu_id`) REFERENCES `submenu` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_permission_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_permission_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_permission_status_id` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_permission_submenu_id` FOREIGN KEY (`submenu_id`) REFERENCES `submenu` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -326,7 +450,7 @@ DROP TABLE IF EXISTS `status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `status` (
-  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
   `status_name` varchar(45) NOT NULL,
   `status_value` smallint(4) NOT NULL,
   PRIMARY KEY (`id`)
@@ -341,6 +465,36 @@ LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` VALUES (1,'Active',1),(2,'Pending',2),(3,'Suspended',3);
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status_message`
+--
+
+DROP TABLE IF EXISTS `status_message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status_message` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `controller_name` varchar(105) NOT NULL,
+  `action_name` varchar(105) NOT NULL,
+  `status_message_name` varchar(105) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `body` longtext NOT NULL,
+  `status_message_description` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status_message`
+--
+
+LOCK TABLES `status_message` WRITE;
+/*!40000 ALTER TABLE `status_message` DISABLE KEYS */;
+/*!40000 ALTER TABLE `status_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -445,4 +599,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-12 17:47:15
+-- Dump completed on 2015-10-15 17:42:18
