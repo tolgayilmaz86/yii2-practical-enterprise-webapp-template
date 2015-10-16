@@ -109,6 +109,45 @@ class PermissionController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionSubMenuId() {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $model = new Permission();
+                $cat_id = $parents[0];
+                $param1 = null;
+                $param2 = null;
+                if (!empty($_POST['depdrop_params'])) {
+                    $params = $_POST['depdrop_params'];
+                    $param1 = $params[0]; // get the value of input-type-1
+                    $param2 = $params[1]; // get the value of input-type-2
+                }
+
+                $out =
+                 [
+                    'group1'=>[
+                        ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+                        ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+                    ],
+                    'group2'=>[
+                        ['id'=>'<sub-cat-id-3>', 'name'=>'<sub-cat-name3>'],
+                        ['id'=>'<sub-cat-id-4>', 'name'=>'<sub-cat-name4>']
+                    ]
+                 ];
+
+
+                $selected = null; //self::getDefaultSubCat($cat_id);
+                // the getDefaultSubCat function will query the database
+                // and return the default sub cat for the cat_id
+
+                echo Json::encode(['output'=>$out, 'selected'=>$selected]);
+                return;
+            }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
+    }
+
     /**
      * Finds the Permission model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

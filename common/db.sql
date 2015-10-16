@@ -319,7 +319,7 @@ CREATE TABLE `permission` (
   CONSTRAINT `fk_permission_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_permission_status_id` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_permission_submenu_id` FOREIGN KEY (`submenu_id`) REFERENCES `submenu` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -328,6 +328,7 @@ CREATE TABLE `permission` (
 
 LOCK TABLES `permission` WRITE;
 /*!40000 ALTER TABLE `permission` DISABLE KEYS */;
+INSERT INTO `permission` VALUES (1,1,2,NULL,NULL,'','','','','');
 /*!40000 ALTER TABLE `permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -393,8 +394,9 @@ DROP TABLE IF EXISTS `profile`;
 CREATE TABLE `profile` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
-  `first_name` text,
-  `last_name` text,
+  `first_name` varchar(32) DEFAULT NULL,
+  `middle_name` varchar(32) DEFAULT NULL,
+  `last_name` varchar(64) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
   `gender_id` smallint(2) unsigned NOT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -413,7 +415,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES (1,1,'tolga','yilmaz','1986-10-10',1,'0000-00-00 00:00:00','2015-10-12 14:12:22');
+INSERT INTO `profile` VALUES (1,1,'tolga',NULL,'yilmaz','1986-10-10',1,'0000-00-00 00:00:00','2015-10-12 14:12:22');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -599,4 +601,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-15 17:42:18
+-- Dump completed on 2015-10-16 17:30:50

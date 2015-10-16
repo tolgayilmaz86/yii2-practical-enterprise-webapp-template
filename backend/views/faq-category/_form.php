@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\widgets\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\FaqCategory */
@@ -16,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'faq_category_weight')->textInput() ?>
 
-    <?= $form->field($model, 'faq_category_is_featured')->dropDownList($model->faqCategoryIsFeaturedList, [ 'prompt' => 'Please Choose One' ])?>
+    <?= $form->field($model, 'faq_category_is_featured')->widget(Select2::classname(),['data' => $model->faqCategoryIsFeaturedList,'options' => ['placeholder' => 'Select ...'],]);?>
 
     <div class="form-group">
 

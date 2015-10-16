@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
+use kartik\widgets\Select2;
 /**
  * @var yii\web\View $this
  * @var backend\models\Profile $model
@@ -28,7 +29,7 @@ use yii\jui\DatePicker;
 
     <br>
 
-    <?= $form->field($model, 'gender_id')->dropDownList($model->genderList, ['prompt' => 'Please Choose One' ]);?>
+    <?= $form->field($model, 'gender_id')->widget(Select2::classname(),['data' => $model->genderList,]);?>
 
     <div class="form-group">
 

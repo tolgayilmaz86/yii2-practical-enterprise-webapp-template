@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use kartik\checkbox\CheckboxX;
 use kartik\dropdown\DropdownX;
 use kartik\widgets\DepDrop;
+use kartik\widgets\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\Permission */
 /* @var $form yii\widgets\ActiveForm */
@@ -15,19 +16,23 @@ use kartik\widgets\DepDrop;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'role_id')->dropDownList($model->roleList, [ 'prompt' => 'Please Choose One' ]); ?>
+    <?= $form->field($model, 'role_id')->widget(Select2::classname(),['data' => $model->roleList,'options' => ['placeholder' => 'Select ...'],]); ?>
 
-    <?= $form->field($model, 'status_id')->dropDownList($model->statusList, [ 'prompt' => 'Please Choose One' ]); ?>
+    <?= $form->field($model, 'status_id')->widget(Select2::classname(),['data' => $model->statusList,'options' => ['placeholder' => 'Select ...'],]); ?>
 
-    <?= $form->field($model, 'main_menu_id')->dropDownList($model->mainMenuList, ['id' => 'mainmenu-id']); ?>
+    <?= $form->field($model, 'main_menu_id')->widget(Select2::classname(),['data' => $model->mainMenuList, 'id' => 'mainmenu-id']); ?>
 
-    <?= $form->field($model, 'submenu_id')->widget(DepDrop::classname(),[
+    <?= $form->field($model, 'submenu_id')->widget(Select2::classname(),[
+//        'data'=>[0 => 'Users'],
+        'options'=>['id'=>'submenu-id', 'placeholder'=>'Select ...'],
         'pluginOptions'=>[
-            'depends'=>['mainmenu-id'],
+            'depends'=>['main_menu_id-id'],
             'placeholder'=>'Select...',
-            'url'=>Url::to(['/site/subcat'])
+            'url'=>Url::to(['/permission/submenuid'])
         ]
-    ]);// dropDownList($model->getSubMenuList('user'), [ 'prompt' => 'Please Choose One' ]); ?>
+    ]);
+    // dropDownList($model->getSubMenuList('user'), [ 'prompt' => 'Please Choose One' ]);
+    ?>
 
     <div class="container">
         <div class="row">
