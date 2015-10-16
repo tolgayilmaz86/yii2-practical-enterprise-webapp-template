@@ -7,14 +7,24 @@ The template is designed to work in a team development environment. It supports
 deploying the application in different environments.
 
 Why this template?
-===============================
+-------------------
 With this template you will get these features out of the box:
-```
--- Customizable user permission
--- Elegant navigation menus (top and side bars) also customizable by permissions.
--- Site wide configurations are editable by web UI
--- Supports for CRUD operations of models with the power of Yii
-```
+
+- Customizable user permissions
+- Elegant navigation menus (top and side bars) also customizable by permissions.
+- Site wide configurations are editable by web UI
+- Supports for CRUD operations of models with the power of Yii
+
+TODO
+-------------------
+- Customizable password format
+- Multilanguage support
+- Customizable UI
+- UI enhancements
+- Permission based menu operations
+- Document and image support
+- Selectabe system wide date format
+- Auto add menus
 
 DIRECTORY STRUCTURE
 -------------------
