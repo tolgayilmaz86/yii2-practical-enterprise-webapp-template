@@ -53,3 +53,10 @@ environments/            contains environment-based overrides
 tests                    contains various tests for the advanced application
     codeception/         contains tests developed with Codeception PHP Testing Framework
 ```
+Screenshots
+-------------------
+<img src="https://raw.githubusercontent.com/tolgayilmaz86/yii2-practical-enterprise-webapp-template/master/common/login.png"/>
+
+<img src ="https://raw.githubusercontent.com/tolgayilmaz86/yii2-practical-enterprise-webapp-template/master/common/menu.png"/>
+
+<img src ="https://raw.githubusercontent.com/tolgayilmaz86/yii2-practical-enterprise-webapp-template/master/common/permissions.png"/>
